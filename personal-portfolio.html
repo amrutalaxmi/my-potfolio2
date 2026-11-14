@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal portfolio of Your Name, a web developer.">
+  <title>Your Name | Web Developer</title>
+  <style>
+    :root {
+      --navy: #0b1224;
+      --navy-light: #121d35;
+      --orange: #ff8a3d;
+      --text: #edf2ff;
+      --muted: #aab5ca;
+      --line: rgba(255,255,255,.12);
+      --card: rgba(255,255,255,.055);
+      --max-width: 1100px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(90%, var(--max-width)); margin: 0 auto; }
+    .accent { color: var(--orange); }
+
+    /* Header and navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(11,18,36,.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+    .navbar {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .logo { font-size: 1.25rem; font-weight: 800; letter-spacing: .5px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--muted); font-size: .95rem; transition: color .2s; }
+    .nav-links a:hover, .nav-links a:focus { color: var(--orange); }
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    /* Reusable section styles */
+    section { padding: 88px 0; }
+    .section-heading { margin-bottom: 32px; }
+    .eyebrow {
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-top: 7px; }
+    .section-intro { color: var(--muted); max-width: 650px; margin-top: 10px; }
+
+    /* Hero */
+    .hero {
+      min-height: 78vh;
+      display: flex;
+      align-items: center;
+      padding: 90px 0;
+      background:
+        radial-gradient(circle at 85% 25%, rgba(255,138,61,.13), transparent 28%),
+        radial-gradient(circle at 10% 90%, rgba(72,112,190,.12), transparent 30%);
+    }
+    .hero-content { max-width: 760px; }
+    .hero h1 {
+      font-size: clamp(2.6rem, 7vw, 5rem);
+      line-height: 1.08;
+      margin: 14px 0 18px;
+    }
+    .hero p { color: var(--muted); max-width: 620px; font-size: 1.08rem; }
+    .button-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+    .button {
+      display: inline-block;
+      padding: 12px 21px;
+      border-radius: 8px;
+      font-weight: 700;
+      border: 1px solid var(--orange);
+      transition: transform .2s, background .2s;
+    }
+    .button:hover { transform: translateY(-3px); }
+    .button.primary { background: var(--orange); color: #1a1720; }
+    .button.secondary { color: var(--orange); }
+
+    /* About */
+    .about-panel {
+      padding: 28px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      max-width: 850px;
+    }
+    .about-panel p { color: var(--muted); }
+    .about-panel p + p { margin-top: 14px; }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 14px;
+    }
+    .skill {
+      padding: 18px;
+      text-align: center;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-weight: 700;
+    }
+    .skill span { display: block; color: var(--orange); font-size: .78rem; margin-top: 4px; }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 255px;
+      padding: 24px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      transition: transform .2s, border-color .2s;
+    }
+    .project-card:hover { transform: translateY(-5px); border-color: var(--orange); }
+    .project-number { color: var(--orange); font-size: .85rem; font-weight: 700; }
+    .project-card h3 { margin: 12px 0 8px; font-size: 1.2rem; }
+    .project-card p { color: var(--muted); font-size: .95rem; }
+    .project-tags { margin-top: auto; padding-top: 20px; color: var(--orange); font-size: .82rem; }
+
+    /* Contact and footer */
+    .contact-panel {
+      padding: 32px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, var(--navy-light), rgba(255,138,61,.08));
+      border-radius: 14px;
+    }
+    .contact-panel p { color: var(--muted); margin: 10px 0 22px; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 18px; }
+    .contact-links a { color: var(--orange); font-weight: 700; }
+    footer { border-top: 1px solid var(--line); padding: 24px 0; color: var(--muted); text-align: center; font-size: .9rem; }
+
+    @media (max-width: 760px) {
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        padding: 18px 5%;
+        background: var(--navy-light);
+        border-bottom: 1px solid var(--line);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .nav-links.open { display: flex; }
+      .projects-grid { grid-template-columns: 1fr; }
+      section { padding: 68px 0; }
+      .hero { min-height: 70vh; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar container" aria-label="Main navigation">
+      <a class="logo" href="#home">Your<span class="accent">Name.</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu"
+              aria-expanded="false" aria-controls="navLinks">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <span class="eyebrow">Hello, welcome to my portfolio</span>
+        <h1>I'm <span class="accent">Your Name</span>,<br>a budding web developer.</h1>
+        <p>I enjoy turning ideas into clean, accessible and responsive websites. I'm learning, building projects and growing my skills one step at a time.</p>
+        <div class="button-row">
+          <a class="button primary" href="#projects">View my work</a>
+          <a class="button secondary" href="#contact">Get in touch</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">A little about me</span>
+          <h2>About <span class="accent">Me</span></h2>
+        </div>
+        <div class="about-panel">
+          <p>Hi! I'm Your Name. I'm an aspiring front-end developer with an interest in creating websites that look good and are easy to use.</p>
+          <p>I have a foundation in HTML and CSS and I'm currently improving my JavaScript and responsive design skills. I like learning by building practical projects and solving problems.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">What I work with</span>
+          <h2>My <span class="accent">Skills</span></h2>
+          <p class="section-intro">A few technologies and tools I'm learning and using.</p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill">HTML5<span>Structure</span></div>
+          <div class="skill">CSS3<span>Styling</span></div>
+          <div class="skill">JavaScript<span>Interactivity</span></div>
+          <div class="skill">Responsive Design<span>Mobile-friendly layouts</span></div>
+          <div class="skill">Git & GitHub<span>Version control</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Things I've built</span>
+          <h2>My <span class="accent">Projects</span></h2>
+          <p class="section-intro">Replace these examples with your own work and add a link to each live project or source-code repository.</p>
+        </div>
+        <div class="projects-grid">
+          <article class="project-card">
+            <span class="project-number">PROJECT 01</span>
+            <h3>Personal Portfolio</h3>
+            <p>A responsive website that introduces me, highlights my skills and gives visitors a way to contact me.</p>
+            <div class="project-tags">HTML · CSS</div>
+          </article>
+          <article class="project-card">
+            <span class="project-number">PROJECT 02</span>
+            <h3>Landing Page</h3>
+            <p>A simple product or service landing page with a clear layout, call-to-action and mobile-friendly design.</p>
+            <div class="project-tags">HTML · CSS · Flexbox</div>
+          </article>
+          <article class="project-card">
+            <span class="project-number">PROJECT 03</span>
+            <h3>To-do List</h3>
+            <p>A beginner-friendly task tracker concept. Add JavaScript to let visitors add, complete and remove tasks.</p>
+            <div class="project-tags">HTML · CSS · JavaScript</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Let's connect</span>
+          <h2>Contact <span class="accent">Me</span></h2>
+        </div>
+        <div class="contact-panel">
+          <h3>Have a project or opportunity in mind?</h3>
+          <p>I'd be happy to hear from you. Send me an email or connect with me on LinkedIn.</p>
+          <div class="contact-links">
+            <a href="mailto:your.email@example.com">your.email@example.com</a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Your Name. Built with HTML & CSS.</div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", isOpen);
+      menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    // Close the mobile menu after a navigation link is selected.
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
